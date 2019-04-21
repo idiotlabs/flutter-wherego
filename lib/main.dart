@@ -6,6 +6,23 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        theme: ThemeData(
+          // Define the default Brightness and Colors
+          brightness: Brightness.light,
+          primaryColor: Colors.amber,
+          accentColor: Colors.amberAccent,
+
+          // Define the default Font Family
+          fontFamily: 'Montserrat',
+
+          // Define the default TextTheme. Use this to specify the default
+          // text styling for headlines, titles, bodies of text, and more.
+          textTheme: TextTheme(
+            headline: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+            title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+            body1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+          ),
+        ),
         home: DefaultTabController(
           length: 3,
           child: Scaffold(
