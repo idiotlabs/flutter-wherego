@@ -6,48 +6,102 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(
-          // Define the default Brightness and Colors
-          brightness: Brightness.light,
-          primaryColor: Colors.amber,
-          accentColor: Colors.amberAccent,
+      theme: ThemeData(
+        // Define the default Brightness and Colors
+        brightness: Brightness.light,
+        primaryColor: Colors.amber,
+        accentColor: Colors.amberAccent,
 
-          // Define the default Font Family
-          fontFamily: 'Montserrat',
+        // Define the default Font Family
+        fontFamily: 'Montserrat',
 
-          // Define the default TextTheme. Use this to specify the default
-          // text styling for headlines, titles, bodies of text, and more.
-          textTheme: TextTheme(
-            headline: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-            title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-            body1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+        // Define the default TextTheme. Use this to specify the default
+        // text styling for headlines, titles, bodies of text, and more.
+        textTheme: TextTheme(
+          headline: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+          title: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+          body1: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+        ),
+      ),
+      home: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: TabBar(
+              tabs: [
+                Tab(icon: Icon(Icons.view_list)),
+                Tab(icon: Icon(Icons.person)),
+                Tab(icon: Icon(Icons.bookmark)),
+              ],
+            ),
+            title: Text('where_go'),
+          ),
+          body: TabBarView(
+            children: [
+              new ListView.builder(
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                      elevation: 8.0,
+                      margin:
+                      new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+                      child: makeListTile
+                  );
+                },
+              ),
+              new ListView(
+                children: list,
+              ),
+              new ListView(
+                children: list,
+              ),
+            ],
           ),
         ),
-        home: DefaultTabController(
-          length: 3,
-          child: Scaffold(
-              appBar: AppBar(
-                bottom: TabBar(
-                  tabs: [
-                    Tab(icon: Icon(Icons.view_list)),
-                    Tab(icon: Icon(Icons.person)),
-                    Tab(icon: Icon(Icons.bookmark)),
-                  ],
-                ),
-                title: Text('Tabs Demo'),
-              ),
-              body: TabBarView(
-                  children: [
-                    Icon(Icons.view_list),
-                    Icon(Icons.person),
-                    Icon(Icons.bookmark),
-                  ],
-              ),
-          ),
-        ),
+      ),
     );
   }
 }
+
+List<Widget> list = <Widget>[
+  new ListTile(
+    title: new Text('CineArts at the Empire',
+        style: new TextStyle(fontWeight: FontWeight.w500, fontSize: 20.0)),
+    subtitle: new Text('85 W Portal Ave'),
+    leading: new Icon(
+      Icons.theaters,
+      color: Colors.blue[500],
+    ),
+  ),
+  new Divider(),
+  new ListTile(
+    title: new Text('K\'s Kitchen',
+        style: new TextStyle(fontWeight: FontWeight.w500, fontSize: 20.0)),
+    subtitle: new Text('757 Monterey Blvd'),
+    leading: new Icon(
+      Icons.restaurant,
+      color: Colors.blue[500],
+    ),
+  ),
+];
+
+List<String> items = List<String>.generate(10000, (i) => "Item $i");
+
+final makeListTile = ListTile(
+    title: Text(
+      "강남구, 고기, 5~10명",
+      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+    ),
+    subtitle: Row(
+      children: <Widget>[
+        Text("지금까지 999곳을 추천받았습니다.", style: TextStyle(color: Colors.black54))
+      ],
+    ),
+    trailing:
+        Text("2010-01-01", style: TextStyle(color: Colors.black87)),
+    contentPadding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+);
+
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
